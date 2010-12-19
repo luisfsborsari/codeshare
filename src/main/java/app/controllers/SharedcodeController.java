@@ -38,16 +38,19 @@ public class SharedcodeController {
 	@Get
 	@Path("/sharedcodes/search")//AJAX
 	public List<Sharedcode> search(String tags){
-		List<Sharedcode> list = repository.findAll();
+/*		List<Sharedcode> list = repository.findAll();
+		System.out.println(list);
 		List<Sharedcode> listMod = new LinkedList<Sharedcode>();
 		for(Sharedcode e: list){
 			if(e.getTags() != null)
 				if(e.getTags().contains(tags))
 					listMod.add(e);
 		}
+		return listMod;*/
 		//System.out.println("Tamanho da lista: " + listodos.size());
-		//List<Sharedcode> list =  repository.search(tags);		
-		return listMod;
+		List<Sharedcode> list =  repository.search(tags);	
+		return list;
+		
 	}
 	
 	@Post

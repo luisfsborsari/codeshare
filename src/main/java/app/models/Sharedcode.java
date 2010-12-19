@@ -51,5 +51,56 @@ public class Sharedcode extends Entity {
 	public String getCodigo() {
 		return codigo;
 	}
+
+	@Override
+	public String toString() {
+		return "Sharedcode [nome=" + nome + ", tags=" + tags + ", linguagem="
+				+ linguagem + ", codigo=" + codigo + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result
+				+ ((linguagem == null) ? 0 : linguagem.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((tags == null) ? 0 : tags.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sharedcode other = (Sharedcode) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		if (linguagem == null) {
+			if (other.linguagem != null)
+				return false;
+		} else if (!linguagem.equals(other.linguagem))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (tags == null) {
+			if (other.tags != null)
+				return false;
+		} else if (!tags.equals(other.tags))
+			return false;
+		return true;
+	}
+	
 	
 }

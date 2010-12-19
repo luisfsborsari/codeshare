@@ -1,5 +1,6 @@
 package app.controllers;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import app.models.Sharedcode;
@@ -28,8 +29,25 @@ public class SharedcodeController {
 	
 	@Get
 	@Path("/sharedcodes")
-	public List<Sharedcode> index() {
-		return repository.findAll();
+	public void index() {
+
+	}
+	
+
+	
+	@Get
+	@Path("/sharedcodes/search")//AJAX
+	public List<Sharedcode> search(String tags){
+		List<Sharedcode> list = repository.findAll();
+		List<Sharedcode> listMod = new LinkedList<Sharedcode>();
+		for(Sharedcode e: list){
+			if(e.getTags() != null)
+				if(e.getTags().contains(tags))
+					listMod.add(e);
+		}
+		//System.out.println("Tamanho da lista: " + listodos.size());
+		//List<Sharedcode> list =  repository.search(tags);		
+		return listMod;
 	}
 	
 	@Post

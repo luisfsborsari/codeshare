@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import app.models.Sharedcode;
+
 public abstract class Repository<T, I extends Serializable> {
 	
 	protected final EntityManager entityManager;
@@ -32,8 +34,10 @@ public abstract class Repository<T, I extends Serializable> {
 	
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
+		System.out.println(getParameterizedClass().getName());
 		return entityManager.createQuery("From " + getParameterizedClass().getName()).getResultList();
 	}
+	
 	
 	@SuppressWarnings("unchecked")
 	private Class<T> getParameterizedClass() {

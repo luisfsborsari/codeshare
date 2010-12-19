@@ -8,6 +8,18 @@ public class Sharedcode extends Entity {
 	private String linguagem;
 	private String codigo;
 	
+	public Sharedcode(String nome, String tags, String linguagem, String codigo) {
+		super();
+		this.nome = nome;
+		this.tags = tags;
+		this.linguagem = linguagem;
+		this.codigo = codigo;
+	}
+
+	public Sharedcode(){
+		
+	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

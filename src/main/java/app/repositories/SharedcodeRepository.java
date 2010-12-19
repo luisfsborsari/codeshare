@@ -18,5 +18,7 @@ public interface SharedcodeRepository {
 	Sharedcode find(Long id);
 	
 	List<Sharedcode> findAll();
+	
+	List<Sharedcode> search(String tags);
 
 }

@@ -3,6 +3,7 @@ package app.controllers;
 import java.util.LinkedList;
 import java.util.List;
 
+import app.models.ObjectView;
 import app.models.Sharedcode;
 import app.repositories.SharedcodeRepository;
 import br.com.caelum.vraptor.Delete;
@@ -13,6 +14,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.ioc.ApplicationScoped;
 
 @Resource
 public class SharedcodeController {
@@ -20,11 +22,13 @@ public class SharedcodeController {
 	private final Result result;
 	private final SharedcodeRepository repository;
 	private final Validator validator;
+	private ObjectView obj;
 	
 	public SharedcodeController(Result result, SharedcodeRepository repository, Validator validator) {
 		this.result = result;
 		this.repository = repository;
 		this.validator = validator;
+		this.obj = new ObjectView();
 	}
 	
 	@Get
@@ -37,7 +41,7 @@ public class SharedcodeController {
 	
 	@Get
 	@Path("/sharedcodes/search")//AJAX
-	public List<Sharedcode> search(String tags){
+	public ObjectView search(String tags){
 /*		List<Sharedcode> list = repository.findAll();
 		System.out.println(list);
 		List<Sharedcode> listMod = new LinkedList<Sharedcode>();
@@ -48,8 +52,9 @@ public class SharedcodeController {
 		}
 		return listMod;*/
 		//System.out.println("Tamanho da lista: " + listodos.size());
-		List<Sharedcode> list =  repository.search(tags);	
-		return list;
+		List<Sharedcode> list =  repository.search(tags);
+		obj.setList(list);
+		return obj;
 		
 	}
 	
@@ -85,8 +90,10 @@ public class SharedcodeController {
 
 	@Get
 	@Path("/sharedcodes/{sharedcode.id}")
-	public Sharedcode show(Sharedcode sharedcode) {
-		return repository.find(sharedcode.getId());
+	public ObjectView show(Sharedcode sharedcode) {
+		Sharedcode code = repository.find(sharedcode.getId());
+		obj.setSharedcode(code);
+		return obj;
 	}
 
 	@Delete

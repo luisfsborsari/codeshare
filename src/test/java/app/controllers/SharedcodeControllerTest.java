@@ -1,9 +1,15 @@
 package app.controllers;
 
+import static org.mockito.Mockito.mock;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import app.models.Sharedcode;
+import app.repositories.SharedcodeRepository;
+import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
 
 public class SharedcodeControllerTest {
 	
@@ -15,6 +21,17 @@ public class SharedcodeControllerTest {
 		code = new Sharedcode("nome","tags","Java","public static void m(){}");
 	}
 
+/*	@Test
+	public void testMock(){
+		SharedcodeRepository repo = Mockito.mock(SharedcodeRepository.class);
+		
+		SharedcodeController cont = new SharedcodeController(mock(Result.class), repo, mock(Validator.class));
+		cont.create( code );
+		
+		Mockito.verify(repo, Mockito.times(1)).create(code);
+		
+	}*/
+	
 	@Test
 	public void testSearch() {
 		try {

@@ -49,8 +49,6 @@
     <input type="hidden" id="sharedcode.id.campo" name="sharedcode.id" value="${sharedcode.id}"/>
     <input type="hidden" name="_method" value="put"/>
   </c:if>
-  
-
 
   <div class="field">
     Nome:<br />
@@ -79,6 +77,8 @@
   </div>
 </form>
 
+
+
 <script type="text/javascript">
 function setCampos(id){	
 	try {
@@ -95,6 +95,6 @@ function setCampos(id){
 	document.getElementById("sharedcode.tags.campo").value = document.getElementById("sharedcode.tags_"+id).value;
 	document.getElementById("sharedcode.linguagem.campo").value = document.getElementById("sharedcode.linguagem_"+id).value;
 	document.getElementById("sharedcode.codigo.campo").value = document.getElementById("sharedcode.codigo_"+id).value;
-	document.getElementById("formPost").setAttribute("method", "put");	
+	document.getElementById("formPost").setAttribute("action", "<c:url value="/sharedcodes/update"/>");	
 }
 </script>

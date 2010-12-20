@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import app.models.Sharedcode;
 
 public abstract class Repository<T, I extends Serializable> {
 	

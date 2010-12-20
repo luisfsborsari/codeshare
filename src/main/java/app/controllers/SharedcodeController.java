@@ -3,7 +3,6 @@ package app.controllers;
 import java.util.LinkedList;
 import java.util.List;
 
-import app.models.ObjectView;
 import app.models.Sharedcode;
 import app.repositories.SharedcodeRepository;
 import br.com.caelum.vraptor.Delete;
@@ -15,6 +14,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 
 @Resource
 public class SharedcodeController {
@@ -22,13 +22,12 @@ public class SharedcodeController {
 	private final Result result;
 	private final SharedcodeRepository repository;
 	private final Validator validator;
-	private ObjectView obj;
 	
 	public SharedcodeController(Result result, SharedcodeRepository repository, Validator validator) {
 		this.result = result;
 		this.repository = repository;
 		this.validator = validator;
-		this.obj = new ObjectView();
+
 	}
 	
 	@Get
@@ -41,29 +40,23 @@ public class SharedcodeController {
 	
 	@Get
 	@Path("/sharedcodes/search")//AJAX
-	public ObjectView search(String tags){
-/*		List<Sharedcode> list = repository.findAll();
-		System.out.println(list);
-		List<Sharedcode> listMod = new LinkedList<Sharedcode>();
-		for(Sharedcode e: list){
-			if(e.getTags() != null)
-				if(e.getTags().contains(tags))
-					listMod.add(e);
-		}
-		return listMod;*/
-		//System.out.println("Tamanho da lista: " + listodos.size());
+	public List<Sharedcode> search(String tags){
 		List<Sharedcode> list =  repository.search(tags);
-		obj.setList(list);
-		return obj;
+		return list;
 		
 	}
 	
 	@Post
 	@Path("/sharedcodes")
 	public void create(Sharedcode sharedcode) {
-		validator.validate(sharedcode);
+		
 		validator.onErrorUsePageOf(this).newSharedcode();
-		repository.create(sharedcode);
+		if(sharedcode != null && sharedcode.getId() == null || sharedcode.getId() == 0)
+			repository.create(sharedcode);
+		else
+			repository.update(sharedcode);
+		
+		
 		result.redirectTo(this).index();
 	}
 	
@@ -90,10 +83,9 @@ public class SharedcodeController {
 
 	@Get
 	@Path("/sharedcodes/{sharedcode.id}")
-	public ObjectView show(Sharedcode sharedcode) {
+	public Sharedcode Sharedcode(Sharedcode sharedcode) {
 		Sharedcode code = repository.find(sharedcode.getId());
-		obj.setSharedcode(code);
-		return obj;
+		return code;
 	}
 
 	@Delete

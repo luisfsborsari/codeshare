@@ -21,6 +21,6 @@ public class SharedcodeRepositoryImpl
 /*		LinkedList<Sharedcode> lista = new LinkedList<Sharedcode>();
 		lista.add(new Sharedcode("Main", "main", "Cobol", "new main"));
 		return lista;*/	
-		return entityManager.createQuery("From " + Sharedcode.class.getName() + " Where tags LIKE '" + tags + "'").getResultList();
+		return entityManager.createQuery("From " + Sharedcode.class.getName() + " Where tags LIKE '%" + tags + "%'").getResultList();
 	}
 }

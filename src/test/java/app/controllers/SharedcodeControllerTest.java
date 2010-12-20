@@ -1,46 +1,84 @@
 package app.controllers;
 
-import static org.junit.Assert.*;
-
+import org.junit.Before;
 import org.junit.Test;
+
+import app.models.Sharedcode;
 
 public class SharedcodeControllerTest {
 	
 	private SharedcodeController controller;
+	private Sharedcode code;
+	
+	@Before
+	public void inicializa(){
+		code = new Sharedcode("nome","tags","Java","public static void m(){}");
+	}
 
 	@Test
 	public void testSearch() {
-		controller.search("");
+		try {
+			controller.search("");
+			assert(true);
+		} catch (Exception e) {
+			assert(false);
+		}
 	}
 
 	@Test
 	public void testCreate() {
-		fail("Not yet implemented");
+		try {
+			controller.create(code);
+			if(controller.search("tags") != null)
+				assert true;
+			else
+				assert false;
+		} catch (Exception e) {
+			assert(false);
+		}
 	}
 
 	@Test
 	public void testNewSharedcode() {
-		fail("Not yet implemented");
+		try {
+			if(controller.newSharedcode() != null)
+				assert true;
+			else
+				assert false;
+		} catch (Exception e) {
+			assert false;
+		}
 	}
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		try {
+			code.setTags("tags2");
+			controller.update(code);
+			if(controller.search("tags2") != null)
+				assert true;
+			else
+				assert false;
+		}
+		catch (Exception e) {
+			assert false;
+		}
+		
 	}
 
-	@Test
-	public void testEdit() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSharedcode() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testDestroy() {
-		fail("Not yet implemented");
+		try {
+			controller.destroy(code);
+			if(controller.edit(code) == null)
+				assert true;
+			else
+				assert false;
+		}
+		catch (Exception e) {
+			assert false;
+		}
 	}
 
 }

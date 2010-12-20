@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<body>
+<h1>CodeShare</h1>
 
 <c:if test="${not empty errors}">
 	<c:forEach items="${errors}" var="error">
@@ -98,3 +100,4 @@ function setCampos(id){
 	document.getElementById("formPost").setAttribute("action", "<c:url value="/sharedcodes/update"/>");	
 }
 </script>
+</body>

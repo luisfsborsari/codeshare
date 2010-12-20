@@ -27,7 +27,7 @@ public class SharedcodeController {
 	
 	@Get
 	@Path("/sharedcodes")
-	public void index() {
+	public void form() {
 
 	}
 	
@@ -45,7 +45,7 @@ public class SharedcodeController {
 	public void create(Sharedcode sharedcode) {
 
 		repository.create(sharedcode);
-		result.redirectTo(this).index();
+		result.redirectTo(this).form();
 		
 	}
 	
@@ -61,7 +61,7 @@ public class SharedcodeController {
 		validator.validate(sharedcode);
 		validator.onErrorUsePageOf(this).edit(sharedcode);
 		repository.update(sharedcode);
-		result.redirectTo(this).index();
+		result.redirectTo(this).form();
 	}
 	
 	@Get
@@ -81,7 +81,7 @@ public class SharedcodeController {
 	@Path("/sharedcodes/delete")
 	public void destroy(Sharedcode sharedcode) {
 		repository.destroy(repository.find(sharedcode.getId()));
-		result.redirectTo(this).index();  
+		result.redirectTo(this).form();  
 	}
 	
 }
